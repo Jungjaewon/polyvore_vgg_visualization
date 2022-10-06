@@ -24,7 +24,7 @@ class CNNLayerVisualization():
         self.selected_layer = selected_layer
         self.selected_filter = selected_filter
         self.conv_output = 0
-        self.total_iter = 201
+        self.total_iter = 801
         # Create the folder to export images if not exists
 
         self.gen_dir = './generated'
@@ -47,7 +47,7 @@ class CNNLayerVisualization():
         # Process image and return variable
         processed_image = preprocess_image(random_image, False)
         # Define optimizer for the image
-        optimizer = Adam([processed_image], lr=0.3, weight_decay=1e-6)
+        optimizer = Adam([processed_image], lr=0.1, weight_decay=1e-6)
         for i in range(1, self.total_iter):
             optimizer.zero_grad()
             # Assign create image to a variable to move forward in the model
@@ -140,7 +140,7 @@ if __name__ == '__main__':
     # [17,100], [17,200],
     #                           [27,200],[27,100],[27,10], [27,5],
     #                           [36,5], [36,10], [36,100],  [36,200],
-    for conv_l, f_pos in [[17,5], [17,10], [17,15]]:
+    for conv_l, f_pos in [[17,5], [17,10], [17,15], [17,50], [17,150], [17,200]]:
         layer_vis = CNNLayerVisualization(pretrained_model, conv_l, f_pos)
         # Layer visualization with pytorch hooks
         layer_vis.visualise_layer_with_hooks()
