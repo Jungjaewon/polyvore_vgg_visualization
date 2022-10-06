@@ -71,7 +71,7 @@ class CNNLayerVisualization():
             # Recreate image
             self.created_image = recreate_image(processed_image)
             # Save image
-            if i % 5 == 0:
+            if i == 30:
                 im_path = f'{self.gen_dir}/layer_vis_l' + str(self.selected_layer) + \
                     '_f' + str(self.selected_filter) + '_iter' + str(i) + '.jpg'
                 save_image(self.created_image, im_path)
@@ -112,7 +112,7 @@ class CNNLayerVisualization():
             # Recreate image
             self.created_image = recreate_image(processed_image)
             # Save image
-            if i % 5 == 0:
+            if i == 30:
                 im_path = f'{self.gen_dir}/layer_vis_l' + str(self.selected_layer) + \
                     '_f' + str(self.selected_filter) + '_iter' + str(i) + '.jpg'
                 save_image(self.created_image, im_path)
@@ -133,7 +133,9 @@ if __name__ == '__main__':
 
     pretrained_model = models.vgg19_bn(pretrained=False).features
 
-    for conv_l, f_pos in [[17,5], [25,10], [25,5], [35,5], [35,10]]:
+    for conv_l, f_pos in [[17,5], [17,10], [17,15], [17,100], [17,200], [17, 300],
+                          [27,300],[27,200],[27,100],[27,10], [27,5],
+                          [36,5], [36,10], [36,100],  [36,200], [36,300], [36,400]]:
         layer_vis = CNNLayerVisualization(pretrained_model, conv_l, f_pos)
         # Layer visualization with pytorch hooks
         layer_vis.visualise_layer_with_hooks()
