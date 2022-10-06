@@ -24,6 +24,7 @@ class CNNLayerVisualization():
         self.selected_layer = selected_layer
         self.selected_filter = selected_filter
         self.conv_output = 0
+        self.total_iter = 2001
         # Create the folder to export images if not exists
 
         self.gen_dir = './generated'
@@ -47,7 +48,7 @@ class CNNLayerVisualization():
         processed_image = preprocess_image(random_image, False)
         # Define optimizer for the image
         optimizer = Adam([processed_image], lr=0.1, weight_decay=1e-6)
-        for i in range(1, 31):
+        for i in range(1, self.total_iter):
             optimizer.zero_grad()
             # Assign create image to a variable to move forward in the model
             x = processed_image
@@ -71,7 +72,7 @@ class CNNLayerVisualization():
             # Recreate image
             self.created_image = recreate_image(processed_image)
             # Save image
-            if i == 30:
+            if i == self.total_iter - 1:
                 im_path = f'{self.gen_dir}/layer_vis_l' + str(self.selected_layer) + \
                     '_f' + str(self.selected_filter) + '_iter' + str(i) + '.jpg'
                 save_image(self.created_image, im_path)
@@ -84,7 +85,7 @@ class CNNLayerVisualization():
         processed_image = preprocess_image(random_image, False)
         # Define optimizer for the image
         optimizer = Adam([processed_image], lr=0.1, weight_decay=1e-6)
-        for i in range(1, 31):
+        for i in range(1, self.total_iter):
             optimizer.zero_grad()
             # Assign create image to a variable to move forward in the model
             x = processed_image
@@ -112,7 +113,7 @@ class CNNLayerVisualization():
             # Recreate image
             self.created_image = recreate_image(processed_image)
             # Save image
-            if i == 30:
+            if i == self.total_iter - 1:
                 im_path = f'{self.gen_dir}/layer_vis_l' + str(self.selected_layer) + \
                     '_f' + str(self.selected_filter) + '_iter' + str(i) + '.jpg'
                 save_image(self.created_image, im_path)
