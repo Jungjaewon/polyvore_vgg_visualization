@@ -139,8 +139,8 @@ def preprocess_image(pil_im, resize_im=True):
         im_as_var (torch variable): Variable that contains processed float tensor
     """
     # mean and std list for channels (Imagenet)
-    mean = [0.485, 0.456, 0.406]
-    std = [0.229, 0.224, 0.225]
+    mean = [0.5, 0.5, 0.5]
+    std = [0.5, 0.5, 0.5]
     # Resize image
     if resize_im:
         pil_im.thumbnail((512, 512))
@@ -168,8 +168,8 @@ def recreate_image(im_as_var):
     returns:
         recreated_im (numpy arr): Recreated image in array
     """
-    reverse_mean = [-0.485, -0.456, -0.406]
-    reverse_std = [1/0.229, 1/0.224, 1/0.225]
+    reverse_mean = [-0.5, -0.5, -0.5]
+    reverse_std = [1/0.5, 1/0.5, 1/0.5]
     recreated_im = copy.copy(im_as_var.data.numpy()[0])
     for c in range(3):
         recreated_im[c] /= reverse_std[c]
