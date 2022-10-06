@@ -133,9 +133,9 @@ if __name__ == '__main__':
 
     pretrained_model = models.vgg19_bn(pretrained=False).features
 
-    for conv_l, f_pos in [[17,5], [17,10], [17,15], [17,100], [17,200], [17, 300],
-                          [27,300],[27,200],[27,100],[27,10], [27,5],
-                          [36,5], [36,10], [36,100],  [36,200], [36,300], [36,400]]:
+    for conv_l, f_pos in [[17,5], [17,10], [17,15], [17,100], [17,200],
+                          [27,200],[27,100],[27,10], [27,5],
+                          [36,5], [36,10], [36,100],  [36,200],]:
         layer_vis = CNNLayerVisualization(pretrained_model, conv_l, f_pos)
         # Layer visualization with pytorch hooks
         layer_vis.visualise_layer_with_hooks()
