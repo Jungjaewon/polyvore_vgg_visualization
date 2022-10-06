@@ -120,15 +120,15 @@ class CNNLayerVisualization():
 if __name__ == '__main__':
     weight_ckpt = 'module-900000-model.ckpt'
     assert os.path.exists(weight_ckpt)
-    # Fully connected layer is not needed
-    pretrained_model = models.vgg19_bn(pretrained=False).features
-
+    pretrained_model = models.vgg19_bn(pretrained=False)
     state_dict = torch.load(weight_ckpt, map_location='cpu')
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
         new_state_dict[k.replace('module.', '')] = v
     pretrained_model.load_state_dict(new_state_dict)
     print(f'{weight_ckpt} is used for training')
+
+    pretrained_model = models.vgg19_bn(pretrained=False).features
 
     for conv_l, f_pos in [[17,5]]:
         layer_vis = CNNLayerVisualization(pretrained_model, conv_l, f_pos)
