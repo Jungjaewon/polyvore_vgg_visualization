@@ -24,7 +24,7 @@ class CNNLayerVisualization():
         self.selected_layer = selected_layer
         self.selected_filter = selected_filter
         self.conv_output = 0
-        self.total_iter = 801
+        self.total_iter = 101
         # Create the folder to export images if not exists
 
         self.gen_dir = './generated'
@@ -120,8 +120,8 @@ class CNNLayerVisualization():
 
 
 if __name__ == '__main__':
-    #weight_ckpt = 'module-900000-model.ckpt'
-    weight_ckpt = 'vgg16_011-98-model.ckpt'
+    weight_ckpt = 'module-900000-model.ckpt'
+    #weight_ckpt = 'vgg16_011-98-model.ckpt'
     assert os.path.exists(weight_ckpt)
     #pretrained_model = models.vgg19_bn(pretrained=False)
     pretrained_model = models.vgg16(pretrained=False)
@@ -135,12 +135,14 @@ if __name__ == '__main__':
     pretrained_model.load_state_dict(new_state_dict)
     print(f'{weight_ckpt} is used for training')
 
-    pretrained_model = models.vgg19_bn(pretrained=False).features
+    pretrained_model = pretrained_model.features
 
     # [17,100], [17,200],
     #                           [27,200],[27,100],[27,10], [27,5],
     #                           [36,5], [36,10], [36,100],  [36,200],
-    for conv_l, f_pos in [[17,5], [17,10], [17,15], [17,50], [17,150], [17,200]]:
+    for conv_l, f_pos in [[17,5], [17,10], [17,15], [17,50], [17,150], [17,200],
+                          [27,200],[27,100],[27,10], [27,5],
+                          [36,5], [36,10], [36,100], [36,200]]:
         layer_vis = CNNLayerVisualization(pretrained_model, conv_l, f_pos)
         # Layer visualization with pytorch hooks
         layer_vis.visualise_layer_with_hooks()
