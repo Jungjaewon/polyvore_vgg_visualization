@@ -5,6 +5,7 @@ base code is from https://github.com/utkuozbulak/pytorch-cnn-visualizations/blob
 import os
 import numpy as np
 import torch
+import torch.nn as nn
 
 from torch.optim import Adam
 from torchvision import models
@@ -121,6 +122,8 @@ if __name__ == '__main__':
     weight_ckpt = 'module-900000-model.ckpt'
     assert os.path.exists(weight_ckpt)
     pretrained_model = models.vgg19_bn(pretrained=False)
+    pretrained_model.classifier[-1] = nn.Linear(pretrained_model.in_features, 380)
+
     state_dict = torch.load(weight_ckpt, map_location='cpu')
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
