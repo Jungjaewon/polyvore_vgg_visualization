@@ -24,8 +24,8 @@ class CNNLayerVisualization():
         self.selected_filter = selected_filter
         self.conv_output = 0
         # Create the folder to export images if not exists
-        if not os.path.exists('../generated_base'):
-            os.makedirs('../generated_base')
+        if not os.path.exists('./generated_base'):
+            os.makedirs('./generated_base')
 
     def hook_layer(self):
         def hook_function(module, grad_in, grad_out):
@@ -69,7 +69,7 @@ class CNNLayerVisualization():
             self.created_image = recreate_image(processed_image)
             # Save image
             if i % 5 == 0:
-                im_path = '../generated_base/layer_vis_l' + str(self.selected_layer) + \
+                im_path = './generated_base/layer_vis_l' + str(self.selected_layer) + \
                     '_f' + str(self.selected_filter) + '_iter' + str(i) + '.jpg'
                 save_image(self.created_image, im_path)
 
@@ -110,7 +110,7 @@ class CNNLayerVisualization():
             self.created_image = recreate_image(processed_image)
             # Save image
             if i % 5 == 0:
-                im_path = '../generated_base/layer_vis_l' + str(self.selected_layer) + \
+                im_path = './generated_base/layer_vis_l' + str(self.selected_layer) + \
                     '_f' + str(self.selected_filter) + '_iter' + str(i) + '.jpg'
                 save_image(self.created_image, im_path)
 
