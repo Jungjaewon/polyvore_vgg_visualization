@@ -123,10 +123,10 @@ if __name__ == '__main__':
     weight_ckpt = 'module-900000-model.ckpt'
     #weight_ckpt = 'vgg16_011-98-model.ckpt'
     assert os.path.exists(weight_ckpt)
-    #pretrained_model = models.vgg19_bn(pretrained=False)
-    pretrained_model = models.vgg16(pretrained=False)
-    #pretrained_model.classifier[-1] = nn.Linear(pretrained_model.classifier[-1].in_features, 380)
-    pretrained_model.classifier[-1] = nn.Linear(pretrained_model.classifier[-1].in_features, 7)
+    pretrained_model = models.vgg19_bn(pretrained=False)
+    #pretrained_model = models.vgg16(pretrained=False)
+    pretrained_model.classifier[-1] = nn.Linear(pretrained_model.classifier[-1].in_features, 380)
+    #pretrained_model.classifier[-1] = nn.Linear(pretrained_model.classifier[-1].in_features, 7)
 
     state_dict = torch.load(weight_ckpt, map_location='cpu')
     new_state_dict = OrderedDict()
